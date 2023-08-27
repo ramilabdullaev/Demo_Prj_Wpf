@@ -1,0 +1,64 @@
+﻿<Window x:Class="DemoProj.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoProj"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Header-->
+        <Grid Background="green" Grid.ColumnSpan="2">
+            <StackPanel  Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Image Source="/Images/images.jpg" Width="80" Margin="10" Height="55"/>
+                <TextBlock Text="Customer List" VerticalAlignment="Center" Margin="0 10 0 0" FontSize="25"/>
+            </StackPanel>
+        </Grid>
+
+        <!--Customer List-->
+        <Grid Grid.Row="2" Background="Gray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+            <Button Margin="42,275,188,50" Click="ButtonAddUstomer_Click">
+                <StackPanel>
+                    <TextBlock FontSize="15" Text="Add"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="183,275,47,50" Click="ButtonDeleteCustomer_Click">
+                <StackPanel>
+                    <TextBlock FontSize="15" Text="Delete"/>
+                </StackPanel>
+            </Button>
+            </Grid>
+
+            <ListView ItemsSource="{Binding Customers}"
+                      SelectedItem="{Binding SelectedCustomer}"
+                      DisplayMemberPath="FirstName"
+                      Margin="10,10,10,88" />
+        </Grid>
+
+        <!--Customer detail-->
+        <StackPanel Grid.Column="1" Grid.Row="2" Margin="10">
+            <Label Content="Firstname:" FontSize="18" FontWeight="Bold"/>
+            <TextBox FontWeight="Medium" Text="{Binding SelectedCustomer.FirstName, 
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Lastname:" FontSize="18" FontWeight="Bold"/>
+            <TextBox FontWeight="Medium" Text="{Binding SelectedCustomer.LastName, 
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+    </Grid>
+</Window>
